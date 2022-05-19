@@ -1,0 +1,324 @@
+{
+	"info": {
+		"_postman_id": "289cafc5-f965-4bec-93f0-cbf18bbc9e90",
+		"name": "Jwt-todolist-heroku",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "登入權限測試",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODY0NDg5Mzk4ZjUzODE1NDRlMWE5YyIsImlhdCI6MTY1Mjk2NzQ2NiwiZXhwIjoxNjUzNTcyMjY2fQ.c-c86Z2wuJumu-Pl8QUo4CP6KIJ2_mbq1HXGvaIqkJo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://morning-tundra-62406.herokuapp.com/check",
+					"protocol": "https",
+					"host": [
+						"morning-tundra-62406",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"check"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "使用者註冊",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n      \"name\":\"Mary\",\r\n      \"email\":\"123456@gmail.com.tw\",\r\n      \"password\":\"123456\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://morning-tundra-62406.herokuapp.com/users",
+					"protocol": "https",
+					"host": [
+						"morning-tundra-62406",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "使用者登入",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\":{\r\n        \"email\":\"123456@gmail.com.tw\",\r\n        \"password\":\"123456\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://morning-tundra-62406.herokuapp.com/users/sign_in",
+					"protocol": "https",
+					"host": [
+						"morning-tundra-62406",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"sign_in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "使用者登出",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODVlYTk1NTEwNGQ1Y2NlYzQ3ZjU0YiIsImlhdCI6MTY1Mjk0NDQ3OSwiZXhwIjoxNjUzNTQ5Mjc5fQ.s2Q1_N484aqdYQI2kxG1Wyh7Fcy23ZrX6UlJWu2P0xI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://morning-tundra-62406.herokuapp.com/users/sign_out",
+					"protocol": "https",
+					"host": [
+						"morning-tundra-62406",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"sign_out"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取得所有代辦事項",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODY0NDg5Mzk4ZjUzODE1NDRlMWE5YyIsImlhdCI6MTY1Mjk2NzQ2NiwiZXhwIjoxNjUzNTcyMjY2fQ.c-c86Z2wuJumu-Pl8QUo4CP6KIJ2_mbq1HXGvaIqkJo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://morning-tundra-62406.herokuapp.com/todos",
+					"protocol": "https",
+					"host": [
+						"morning-tundra-62406",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除單筆代辦事項",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODY0NDg5Mzk4ZjUzODE1NDRlMWE5YyIsImlhdCI6MTY1Mjk2NzQ2NiwiZXhwIjoxNjUzNTcyMjY2fQ.c-c86Z2wuJumu-Pl8QUo4CP6KIJ2_mbq1HXGvaIqkJo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://morning-tundra-62406.herokuapp.com/todos/6286429452a186076794a79e",
+					"protocol": "https",
+					"host": [
+						"morning-tundra-62406",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"todos",
+						"6286429452a186076794a79e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增單筆代辦事項",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODY0NDg5Mzk4ZjUzODE1NDRlMWE5YyIsImlhdCI6MTY1Mjk2NzQ2NiwiZXhwIjoxNjUzNTcyMjY2fQ.c-c86Z2wuJumu-Pl8QUo4CP6KIJ2_mbq1HXGvaIqkJo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"todo\":{\r\n        \"content\":\"brush your teehes\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://morning-tundra-62406.herokuapp.com/todos",
+					"protocol": "https",
+					"host": [
+						"morning-tundra-62406",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "修改單筆代辦事項",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODY0NDg5Mzk4ZjUzODE1NDRlMWE5YyIsImlhdCI6MTY1Mjk2NzQ2NiwiZXhwIjoxNjUzNTcyMjY2fQ.c-c86Z2wuJumu-Pl8QUo4CP6KIJ2_mbq1HXGvaIqkJo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"todo\":{\r\n        \"content\":\"drink coffee\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://morning-tundra-62406.herokuapp.com/todos/6286487cc3615a62f5666990",
+					"protocol": "https",
+					"host": [
+						"morning-tundra-62406",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"todos",
+						"6286487cc3615a62f5666990"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "切換單筆代辦事項是否完成",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODY0NDg5Mzk4ZjUzODE1NDRlMWE5YyIsImlhdCI6MTY1Mjk2NzQ2NiwiZXhwIjoxNjUzNTcyMjY2fQ.c-c86Z2wuJumu-Pl8QUo4CP6KIJ2_mbq1HXGvaIqkJo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://morning-tundra-62406.herokuapp.com/todos/6286487cc3615a62f5666990/toggle",
+					"protocol": "https",
+					"host": [
+						"morning-tundra-62406",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"todos",
+						"6286487cc3615a62f5666990",
+						"toggle"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

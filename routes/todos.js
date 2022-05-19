@@ -11,6 +11,20 @@ const decoding = require("../service/decodingJWT");
 router.get(
   "/",
   handleErrorAsync(async (req, res, next) => {
+    /**
+     * #swagger.tags = ['Todos']
+       #swagger.security = [{ "apiKeyAuth": [] }]
+        * #swagger.summary = 'Todo 列表'
+     * #swagger.responses[200] = {
+          description: '自己的 TODO List',
+          
+        }
+     * #swagger.responses[401] = {
+          description: '未授權',
+          
+        }
+     }
+     */
     const token = req.headers.authorization.split(" ")[1];
     const currentUser = await decoding(token);
     const user = currentUser.id;
@@ -22,6 +36,31 @@ router.get(
 router.post(
   "/",
   handleErrorAsync(async (req, res, next) => {
+    /**
+     * #swagger.tags = ['Todos']
+      #swagger.security = [{ "apiKeyAuth": [] }]
+     * #swagger.summary = '新增 Todo'
+      #swagger.parameters['body'] = {
+            in: "body",
+            type: "object",
+            required: true,
+            description: "資料格式",
+            schema: { 
+              "todo": {
+                    "content": "string",
+                  }
+                }
+            }
+     * #swagger.responses[201] = {
+          description: '該筆 TODO 資料',
+          
+        }
+     * #swagger.responses[401] = {
+          description: '未授權',
+          
+        }
+    }
+     */
     if (!req.body.todo) {
       return appError(401, "資料格式錯誤", next);
     }
@@ -45,23 +84,55 @@ router.post(
 router.delete(
   "/:id",
   handleErrorAsync(async (req, res, next) => {
-    const { id } = req.params;
-
-    if (id.length !== 24) {
-      return appError(401, "請確認ID是否正確", next);
+    /**
+     * #swagger.tags = ['Todos']
+        #swagger.security = [{ "apiKeyAuth": [] }]
+        * #swagger.summary = 'Todo 列表'
+     * #swagger.responses[200] = {
+          description: '自己的 TODO List',
+          
+        }
+     * #swagger.responses[401] = {
+          description: '未授權',
+          
+        }
     }
-    const isDeleteTodo = await Todo.findByIdAndDelete(id);
-    if (!isDeleteTodo) {
-      return appError(401, "查無此ID", next);
-    }
-
-    handleSuccess(res, 201, null, "已刪除!!");
+     */
+    const token = req.headers.authorization.split(" ")[1];
+    const currentUser = await decoding(token);
+    const user = currentUser.id;
+    const todos = await Todo.find({ user }).select("id content completed_at");
+    handleSuccess(res, 200, todos);
   })
 );
 
 router.put(
   "/:id",
   handleErrorAsync(async (req, res, next) => {
+    /**
+     * #swagger.tags = ['Todos']
+      #swagger.security = [{ "apiKeyAuth": [] }]
+        * #swagger.summary = '修改 Todo'
+      #swagger.parameters['body'] = {
+            in: "body",
+            type: "object",
+            required: true,
+            description: "資料格式",
+            schema: { "todo": {
+                            "content": "string",
+                            } 
+                  }
+            }
+     * #swagger.responses[200] = {
+          description: '修改過的 TODO 資料',
+          
+        }
+     * #swagger.responses[401] = {
+          description: '未授權',
+          
+        }
+    }
+     */
     if (!req.body.todo) {
       return appError(401, "資料格式錯誤", next);
     }
@@ -86,9 +157,22 @@ router.put(
     handleSuccess(res, 201, newTodo);
   })
 );
+
 router.patch(
   "/:id/toggle",
   handleErrorAsync(async (req, res, next) => {
+    /**
+      * #swagger.tags = ['Todos']
+        #swagger.security = [{ "apiKeyAuth": [] }]
+         * #swagger.summary = 'Todo 完成/已完成 切換'
+      * #swagger.responses[200] = {
+          description: 'Todo',
+        }
+      * #swagger.responses[401] = {
+          description: '未授權',
+        }
+      }
+      */
     const { id } = req.params;
     if (id.length !== 24) {
       return appError(401, "請確認ID是否正確", next);

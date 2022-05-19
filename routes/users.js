@@ -24,7 +24,7 @@ const generateSendJWT = (user, statusCode, res) => {
     message: "登入成功",
     email,
     name,
-    token,
+    token: `Bearer ${token}`,
   };
   handleSuccess(res, statusCode, data);
 };
@@ -33,6 +33,18 @@ router.get(
   "/check",
   handleErrorAsync(isAuth),
   handleErrorAsync(async (req, res, next) => {
+    /**
+      * #swagger.tags = ['Text']
+        #swagger.security = [{ "apiKeyAuth": [] }]
+         * #swagger.summary = '登入權限測試'
+      * #swagger.responses[200] = {
+          description: 'OK',
+        }
+      * #swagger.responses[401] = {
+          description: '未授權',
+        }
+      }
+    */
     handleSuccess(res, 200, null, "已授權");
   })
 );
@@ -40,17 +52,41 @@ router.get(
 router.post(
   "/users",
   handleErrorAsync(async (req, res, next) => {
+    /**
+     * #swagger.tags = ['Users']
+        * #swagger.summary = '使用者註冊'
+        #swagger.parameters['body'] = {
+            in: "body",
+            type: "object",
+            required: true,
+            description: "資料格式",
+            schema: { "user": {
+                            "email": "string",
+                            "name": "string",
+                            "password": "string"
+                            } }
+            }
+     * #swagger.responses[200] = {
+          description: '註冊成功',
+          
+        }
+     * #swagger.responses[422] = {
+          description: '註冊失敗',
+          
+        }
+    }
+     */
     const { name, email, password } = req.body;
     const errMessage = [];
     if (!name || !email || !password) {
-      return appError(400, "欄位未填寫正確", next);
+      return appError(422, "欄位未填寫正確", next);
     }
     if (!validator.isLength(password, { min: 6 })) {
       errMessage.push("密碼 字數太少，至少需要 6 個字");
     }
     if (!validator.isEmail(email)) {
       errMessage.push("電子信箱 格式有誤");
-      return appError(400, errMessage, next);
+      return appError(422, errMessage, next);
     }
     // 比對 資料庫email
     const isRegister = await User.findOne({ email });
@@ -68,7 +104,7 @@ router.post(
       });
       handleSuccess(res, 200, data);
     } else {
-      return appError(400, "此信箱已註冊過", next);
+      return appError(422, "此信箱已註冊過", next);
     }
   })
 );
@@ -76,6 +112,29 @@ router.post(
 router.post(
   "/users/sign_in",
   handleErrorAsync(async (req, res, next) => {
+    /**
+     * #swagger.tags = ['Users']
+        * #swagger.summary = '使用者登入'
+        #swagger.parameters['body'] = {
+            in: "body",
+            type: "object",
+            required: true,
+            description: "資料格式",
+            schema: { "user": {
+                            "email": "string",
+                            "password": "string"
+                            } }
+            }
+     * #swagger.responses[200] = {
+          description: '登入成功',
+          
+        }
+     * #swagger.responses[401] = {
+          description: '登入失敗',
+          
+        }
+    }
+     */
     if (!req.body.user) {
       return appError(401, "資料格式錯誤", next);
     }
@@ -103,6 +162,18 @@ router.delete(
   "/users/sign_out",
   handleErrorAsync(isAuth),
   handleErrorAsync(async (req, res, next) => {
+    /**
+      * #swagger.tags = ['Users']
+        #swagger.security = [{ "apiKeyAuth": [] }]
+         * #swagger.summary = '使用者登出'
+      * #swagger.responses[200] = {
+          description: '登出成功',
+        }
+      * #swagger.responses[401] = {
+          description: '登出失敗',
+        }
+      }
+    */
     handleSuccess(res, 200, null, "登出成功");
   })
 );

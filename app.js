@@ -5,7 +5,9 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
 
-const indexRouter = require("./routes/index");
+const swaggerUI = require("swagger-ui-express");
+const swaggerFile = require("./swagger-output.json");
+
 const usersRouter = require("./routes/users");
 const todosRouter = require("./routes/todos");
 
@@ -32,7 +34,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 require("./connections");
 
-app.use("/", indexRouter);
+app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerFile));
+
 app.use(usersRouter);
 app.use("/todos", handleErrorAsync(isAuth), todosRouter);
 
