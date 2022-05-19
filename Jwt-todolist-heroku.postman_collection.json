@@ -50,7 +50,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": " {\r\n      \"name\":\"Mary\",\r\n      \"email\":\"123456@gmail.com.tw\",\r\n      \"password\":\"123456\"\r\n    }",
+					"raw": " {\r\n     \"user\":{\r\n        \"name\":\"Mary\",\r\n        \"email\":\"123456@gmail.com.tw\",\r\n        \"password\":\"123456\"\r\n     }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

@@ -237,7 +237,7 @@
         "tags": [
           "Todos"
         ],
-        "summary": "Todo 列表",
+        "summary": "刪除 Todo ",
         "description": "",
         "parameters": [
           {
@@ -245,16 +245,11 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "自己的 TODO List"
+            "description": "已刪除"
           },
           "401": {
             "description": "未授權"

@@ -87,9 +87,9 @@ router.delete(
     /**
      * #swagger.tags = ['Todos']
         #swagger.security = [{ "apiKeyAuth": [] }]
-        * #swagger.summary = 'Todo 列表'
+        * #swagger.summary = '刪除 Todo '
      * #swagger.responses[200] = {
-          description: '自己的 TODO List',
+          description: '已刪除',
           
         }
      * #swagger.responses[401] = {
@@ -98,11 +98,16 @@ router.delete(
         }
     }
      */
-    const token = req.headers.authorization.split(" ")[1];
-    const currentUser = await decoding(token);
-    const user = currentUser.id;
-    const todos = await Todo.find({ user }).select("id content completed_at");
-    handleSuccess(res, 200, todos);
+    const { id } = req.params;
+    if (id.length !== 24) {
+      return appError(401, "請確認ID是否正確", next);
+    }
+    const isDelete = await Todo.findByIdAndDelete(id);
+    console.log("isDelete :>> ", isDelete);
+    if (!isDelete) {
+      return appError(401, "查無此 id", next);
+    }
+    handleSuccess(res, 200, null, "已刪除");
   })
 );
 
