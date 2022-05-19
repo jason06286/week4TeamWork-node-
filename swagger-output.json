@@ -5,7 +5,7 @@
     "description": "user post & todoList crud",
     "version": "1.0.0"
   },
-  "host": "https://morning-tundra-62406.herokuapp.com",
+  "host": "morning-tundra-62406.herokuapp.com",
   "basePath": "/",
   "schemes": [
     "http",

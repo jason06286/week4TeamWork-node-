@@ -5,7 +5,7 @@ const doc = {
     title: "TodoList API",
     description: "user post & todoList crud",
   },
-  host: "https://morning-tundra-62406.herokuapp.com",
+  host: "morning-tundra-62406.herokuapp.com",
   schemes: ["http", "https"],
   securityDefinitions: {
     apiKeyAuth: {

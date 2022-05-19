@@ -76,7 +76,10 @@ router.post(
         }
     }
      */
-    const { name, email, password } = req.body;
+    if (!req.body.user) {
+      return appError(422, "欄位未填寫正確", next);
+    }
+    const { name, email, password } = req.body.user;
     const errMessage = [];
     if (!name || !email || !password) {
       return appError(422, "欄位未填寫正確", next);
