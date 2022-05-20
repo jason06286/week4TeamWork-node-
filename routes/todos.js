@@ -76,6 +76,8 @@ router.post(
       user,
       content,
     });
+    newTodo.id = newTodo._id;
+    await newTodo.save();
 
     handleSuccess(res, 201, newTodo);
   })
