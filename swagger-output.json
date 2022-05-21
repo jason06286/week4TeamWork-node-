@@ -23,7 +23,7 @@
     "/check": {
       "get": {
         "tags": [
-          "Text"
+          "Test"
         ],
         "summary": "登入權限測試",
         "description": "",

@@ -34,7 +34,7 @@ router.get(
   handleErrorAsync(isAuth),
   handleErrorAsync(async (req, res, next) => {
     /**
-      * #swagger.tags = ['Text']
+      * #swagger.tags = ['Test']
         #swagger.security = [{ "apiKeyAuth": [] }]
          * #swagger.summary = '登入權限測試'
       * #swagger.responses[200] = {
